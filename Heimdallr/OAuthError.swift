@@ -25,7 +25,7 @@ public enum OAuthErrorCode: String {
 }
 
 public extension OAuthErrorCode {
-    public var intValue: Int {
+    var intValue: Int {
         switch self {
         case .InvalidRequest:
             return OAuthErrorInvalidRequest
@@ -66,7 +66,7 @@ public class OAuthError {
 }
 
 public extension OAuthError {
-    public var nsError: NSError {
+    var nsError: NSError {
         var userInfo = [String: AnyObject]()
 
         if let description = description {
@@ -94,7 +94,7 @@ extension OAuthError {
     }
 
     public class func decode(data: Data) -> OAuthError? {
-        guard let json: AnyObject? = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as AnyObject?,
+        guard let json: AnyObject = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as AnyObject?,
             let jsonDictionary = json as? [String: AnyObject] else {
             return nil
         }
